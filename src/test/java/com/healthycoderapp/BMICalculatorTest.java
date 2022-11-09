@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +85,7 @@ class BMICalculatorTest {
     }
 
     @Test
-    void shouldReturnCoderWithWorstBMIWhenCoderListNotEmpty(){
+    void should_ReturnCoderWithWorstBMI_When_CoderListNotEmpty(){
         // given
         List<Coder> coders = new ArrayList<>();
         coders.add(new Coder(1.80, 60.0));
@@ -97,6 +98,18 @@ class BMICalculatorTest {
             () -> assertEquals(1.82, coderWorstBMI.getHeight()),
             () -> assertEquals(98.0, coderWorstBMI.getWeight())
         );
+    }
+
+    @Test
+    void should_ReturnCoderWithWorstBMIIn1Ms_When_CoderListHas1000Elements(){
+        // given
+        List<Coder> coders = new ArrayList<>();
+        for (int i = 0; i < 1000; i++)
+            coders.add(new Coder(1.0 + i, 10.0 + i));
+        // when
+        Executable executable = () -> BMICalculator.findCoderWithWorstBMI(coders);
+        // then
+        assertTimeout(Duration.ofMillis(10), executable);
     }
 
     @Test
