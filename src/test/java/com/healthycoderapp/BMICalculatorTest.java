@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +25,32 @@ class BMICalculatorTest {
         System.out.println("After all unit tests");
     }
 
+    @Test
+    void shouldReturnTrueWhenDietRecommended_v1() {
+        // given
+        double weight = 85.0;
+        double height = 1.69;
+        // when
+        boolean recommended = BMICalculator.isDietRecommended(weight, height);
+        // then
+        assertTrue(recommended);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"85.0,1.69", "89.0,1.72", "95.0,1.75"})
+    void shouldReturnTrueWhenDietRecommended_v2(Double coderWeight, Double coderHeight) {
+        // given
+        double weight = coderWeight;
+        double height = coderHeight;
+        // when
+        boolean recommended = BMICalculator.isDietRecommended(weight, height);
+        // then
+        assertTrue(recommended);
+    }
+
     @ParameterizedTest(name = "weight {0}, height {1}")
     @CsvFileSource(resources = "/diet-recommended-input-data.csv", numLinesToSkip = 1)
-    void shouldReturnTrueWhenDietRecommended(Double coderWeight, Double coderHeight) {
+    void shouldReturnTrueWhenDietRecommended_v3(Double coderWeight, Double coderHeight) {
         // given
         double weight = coderWeight;
         double height = coderHeight;
