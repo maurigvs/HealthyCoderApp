@@ -1,9 +1,8 @@
 package com.healthycoderapp;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -31,6 +30,7 @@ class BMICalculatorTest {
     }
 
     @Nested
+    @DisplayName(">>> Sample Inner Class display name")
     class isDietRecommendedTests {
         @Test
         void shouldReturnTrueWhenDietRecommended_v1() {
@@ -94,6 +94,8 @@ class BMICalculatorTest {
     @Nested
     class findCoderWithWorstBMITests {
         @Test
+        @DisplayName(">>> Sample Method display name")
+        @Disabled // disable test
         void should_ReturnCoderWithWorstBMI_When_CoderListNotEmpty(){
             // given
             List<Coder> coders = new ArrayList<>();
@@ -123,6 +125,7 @@ class BMICalculatorTest {
         }
 
         @Test
+        @DisabledOnOs(OS.WINDOWS)
         void shouldReturnNullWorstBMIWhenCoderListEmpty(){
             // given
             List<Coder> coders = new ArrayList<>();
