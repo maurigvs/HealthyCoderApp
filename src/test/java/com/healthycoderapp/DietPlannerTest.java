@@ -37,7 +37,7 @@ class DietPlannerTest {
         );
     }
 
-    @RepeatedTest(value = 10, name = RepeatedTest.LONG_DISPLAY_NAME)
+    @RepeatedTest(value = 5, name = RepeatedTest.LONG_DISPLAY_NAME)
     // recommended when you need test random values
     void should_ReturnCorrectDietPlan_When_CorrectCoder_v2() {
         // given
