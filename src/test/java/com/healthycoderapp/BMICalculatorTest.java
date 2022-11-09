@@ -13,8 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 class BMICalculatorTest {
+
+    private String environment = "dev";
 
     @BeforeAll // always static
     static void beforeAll(){
@@ -103,6 +106,7 @@ class BMICalculatorTest {
     @Test
     void should_ReturnCoderWithWorstBMIIn1Ms_When_CoderListHas1000Elements(){
         // given
+        assumeTrue(this.environment.equals("prod")); // results in skiped test
         List<Coder> coders = new ArrayList<>();
         for (int i = 0; i < 1000; i++)
             coders.add(new Coder(1.0 + i, 10.0 + i));
